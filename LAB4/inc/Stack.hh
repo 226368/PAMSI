@@ -2,6 +2,7 @@
 #define STACK_HH
 
 #include "iStack.hh"
+#include "MeasureAble.hh"
 #include <string.h>
 #include "stoper.hh"
 #include <iostream>
@@ -20,7 +21,7 @@ class Stack: public iStack{
 public:
 
 	Stack();
-	~Stack();
+	virtual ~Stack();
 
 
 	virtual int  top();

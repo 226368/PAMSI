@@ -4,7 +4,7 @@
 #include <ctime>
 #include <string.h>
 #include "stoper.hh"
-//#include "zbior_danych.hh"
+
 #include "iTablica.hh"
 #include "iStoper.hh"
 
@@ -48,6 +48,7 @@ public:
 	void zmniejsz_operacja_pom(unsigned int nowy_rozmiar,unsigned int &temp_rozm);
 	void resetTablicy();
 	virtual int sizeTab();
-
+	virtual void quickSort(int lewy,int prawy);
+	virtual void measureQuickSort();
 
 };

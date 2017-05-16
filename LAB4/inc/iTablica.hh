@@ -16,7 +16,8 @@ class iTablica: public MeasureAble {
   virtual void wyswietl() = 0;
   virtual void measureTime() = 0;
   virtual int sizeTab() = 0;
-
+  virtual void quickSort(int lewy, int prawy)=0;
+  virtual void measureQuickSort() = 0;
   
 
 

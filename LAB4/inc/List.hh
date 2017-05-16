@@ -15,7 +15,7 @@ public:
 
 };
 
-class List{
+class List: public iList{
 
 	listH *head;
 
@@ -31,7 +31,6 @@ public:
 	virtual void  pushFront(int value);
 	virtual void  pushBack(int value);
 	virtual void  pushBefore(listH *ptr,int value);
-	//virtual void 	pushAfter(listH *ptr,int value);
 
 	virtual void  popBack();
 	virtual void 	popFront();
@@ -39,8 +38,8 @@ public:
 	virtual void 	printList();
 
 	virtual void 	remove(listH *ptr);
-	virtual void 	resetList();   												//usuwa wszystkie elementy listy
-	virtual void 	addElem(unsigned long int sizeList);													//powiększa liste do zadanego rozmiaru
+	virtual void 	resetList();   																		//usuwa wszystkie elementy listy
+	virtual void 	addElem(unsigned long int sizeList);							//powiększa liste do zadanego rozmiaru
 	virtual void  measureTime();
 };
 
