@@ -41,7 +41,7 @@ stoper::~stoper()
 	for(int i=0;i<size;i++)
 	{
 		temp += *(ptr+i);
-		//cout << "wartość pomiaru " << i+1 <<" to " << *(ptr+i) << endl;
+		cout << "wartość pomiaru " << i+1 <<" to " << *(ptr+i) << endl;
 	}
 
 	cout << "średnia wartość pomiaru szybkości programu to: " << temp/size << "sek\n" << endl;
