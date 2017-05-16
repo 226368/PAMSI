@@ -1,0 +1,11 @@
+Pkt nr. 2 ukazuje pomiar szybkości dla QuickSorta 
+
+Dla Pkt 1 i 2:
+
+Oznaczenia T1 - ukazuje czas sortowania tablicy ułożonej losowo
+           T2 - ukazuje czas sortowania tablicy ułożonej malejąco
+           T2 - ukazuje czas sortowania tablicy ułożonej rosnąco
+           
+           
+W II pkt wniosków, chodzi o to że QuickSort jest wolniejszy dla małej ilości danych, a dla dużej ilości danych MargeSort
+z kolei przegrywa z QuickSortem
