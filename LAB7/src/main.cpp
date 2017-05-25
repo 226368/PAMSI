@@ -5,17 +5,21 @@
 
 using namespace std;
 
+int* data;
+int rozmiar = 13; //rozmiar tablicy
+
 int main() {
 
-Hash a;
 
-string A;
+Hash *object = new Hash;
 
-cin >> A;
+object -> measureTime();
 
-a.changeString(A);
+ 
 
-
+delete object;
 	return 0;
+
+
 
 }
