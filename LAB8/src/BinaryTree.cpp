@@ -104,25 +104,7 @@ Node*  BinaryTree::search(Node* object, int value)
 
 Node*  BinaryTree::insert(Node* object, int value)
 {
-  /*if( object == nullptr)
-  {
-    object = new Node;
-    object -> data = value;
-    object -> leftChild = nullptr;
-    object -> rightChild = nullptr;
-  }
 
-  else if( value < object -> data)
-  {
-    object -> leftChild = insert(object -> leftChild, value);
-  }
-
-  else if( value > object -> data)
-  {
-    object -> rightChild = insert(object -> rightChild,value);
-  }
-
-  return object;*/
   if( value < object -> data)
   {
     if(object->leftChild != nullptr)
@@ -268,6 +250,9 @@ void BinaryTree::sizeofTree()
 
 void BinaryTree::measureTime()
 {
+  srand(time(NULL));
+
+
   int sizeTree, quantity;
   stoper pomiar;
 
@@ -282,14 +267,17 @@ void BinaryTree::measureTime()
   enlarge(sizeTree);
   sizeofTree();
 
+for(int i=0;i<10;++i)
+{
+  pomiar.startPomiar();
 
   for(int i=0;i<quantity;++i)
   {
-    pomiar.startPomiar();
     search( rand() % sizeTree);
-    pomiar.koniecPomiar();
   }
 
+  pomiar.koniecPomiar();
+}
 
   makeEmpty();
   sizeofTree();

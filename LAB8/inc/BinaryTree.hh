@@ -21,8 +21,8 @@ class BinaryTree: public Node {
 
   Node* root;
 
-  void inorder(Node* object);
-  int sizeofTree(Node* object);
+  void inorder(Node* object);               //wyswietla elementy drzewa od najmniejszego do największego
+  int sizeofTree(Node* object);             
 
   Node* makeEmpty(Node* object);
   Node* findMin(Node* object);
@@ -36,11 +36,18 @@ public:
   BinaryTree();
   ~BinaryTree();
 
+  /*
+  Funkcje które uruchamiają te funkcje w części prywatnej
+  */
   void insert(int value);
   void remove(int value);
   void search(int value);
-  void enlarge(int value);
 
+
+  /*
+  Zarządzanie drzewem
+  */
+  void enlarge(int value);
   void makeEmpty();
   void display();
   void measureTime();
