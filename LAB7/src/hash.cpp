@@ -3,17 +3,77 @@
 
 Hash::Hash()
 {
-  tab = new lista*[sizeTab];
-  for(int i=0;i<sizeTab;++i)
-  {
-    *(tab+i) = nullptr;
-  }
+  setSize();
+  tab  = new Lista[sizeTab];
+  dane = new int[sizeTab];
 }
 
 
 Hash::~Hash()
 {
   delete[] tab;
+}
+
+bool Hash::liczba_pierwsza(int value)
+{
+	 if(value<2)
+   {
+	    return false;
+	 }
+
+	 for(int i=2;i*i<=value;i++)
+   {
+	    if(value%i == 0) return false;
+   }
+
+	 return true;
+
+}
+
+void Hash::setSize()
+{
+  int size;
+  cout << "podaj rozmiar tablicy: ";
+
+  do
+  {
+		cin >> size;
+	}while(liczba_pierwsza(size) == false);
+  cout << "wpisałes liczbę pierwszą :)\n" << endl;
+  sizeTab = size;
+}
+
+void Hash::losowanieKluczy(int size)
+{
+  array = new int[size];
+
+  int tmp, index;
+  bool temp;
+  srand(time(NULL));
+
+  index = 0;
+
+  do
+  {
+    tmp = 1 + rand() % size;
+
+    temp = true;
+    for(int i = 0;i<index;i++)
+    {
+      if(array[index] == tmp)
+      {
+        temp = false;
+        break;
+      }
+    }
+
+    if(temp)
+    {
+      array[index++] = tmp;
+    }
+
+  } while(index < size);
+
 }
 
 string Hash::stringGenerator()
@@ -57,165 +117,80 @@ int Hash::hashSec(const int value)
   return sizeTab*(a*value % 1) ;
 }
 
-void Hash::addLink(int x)
-{
-  int index = hash(x);
-  if(tab[index] == nullptr)
-  {
-    tab[index] = new lista;
-  }
-
-  tab[index] -> pushFront(x);
-}
-
-int Hash::deleteLink(int x)
-{
-  int index = hash(x);
-  int b = tab[index] -> pop(x);
-  return b;
-}
-
-bool Hash::wyszukaj_linkowanie(int x) //wyszukiwanie przez linkowanie
-{
-  bool zwroc_wartosc = false;
-  int index = hash(x); //hashowanie
-  if (tab[index]->searchElem(x)==0)
-  {
-    zwroc_wartosc=false;
-  } //jesli nie znaleziono elementu to funkcja zwraca 0
-  else
-  {
-    zwroc_wartosc=true;
-    cout<<tab[index]->searchElem(x)<<" ";
-  } // jesli znaleziono, to zwraca true oraz wypisuje ilosc probkowan
-  return zwroc_wartosc;
-}
-
-
-void Hash::dodaj_probkowanie(int x) //dodawanie rozwiazane przez probkowanie liniowe
-{
-
-    int index = hash(x);
-    int pom = index;
-    int flag=0;
-        while (tab[pom]!=NULL && flag<sizeTab)
-        {
-                pom=(pom+1)%sizeTab; //jesli element zajety, to sprawdz kolejny
-                flag++;
-        }
-    if (tab[pom]==NULL) //jesli jest miejsce to dodaj, jesli nie to blad
-    {
-        tab[pom] = new lista;
-        tab[pom] ->pushFront(x);
-    }
-    else
-        cerr << "Brak miejsca w tablicy" << endl;
-}
-
-
-int Hash::usun_probkowanie(int x) //usuwanie przez probkowanie liniowe
-{
-    int element;
-    int index = hash(x);
-    int pom = index;
-    int flag=0;
-        while (tab[pom]->returnFirst()!=x && flag<sizeTab)
-        {
-                pom=(pom+1)%sizeTab; //jesli element nie jest rowny x to przejdz do nastepnego
-                flag++;
-        }
-
-    if(tab[pom]->returnFirst() ==  x) //jesli element rowny x to usun i zwroc, jesli nie to blad
-    {
-    element=tab[pom]->pop(x);
-    }
-    else
-        cerr << "brak elementu" << endl;
-
-return element;
-}
-
-bool Hash::wyszukaj_probkowanie(int x) //wyszukiwanie przez probkowanie liniowe
-{
-    int index = hash(x);
-    int pom = index;
-        int flag=1;
-        while (tab[pom]->returnFirst()!=x && flag<=sizeTab)
-        {
-                pom=(pom+1)%sizeTab; //jelsi element rozny od x to przejdz do nastepnego
-                flag++;
-        }
-    if(tab[pom]->returnFirst() ==  x) //jesli element rowny x to funkca zwraca true
-    {
-        //cout<< flag <<" "; //wypisz ilosc probkowan
-        //cout << endl;
-        return true;
-    }
-    else
-        return false;
-}
 
 int Hash::sizeOfTab()
 {
   return sizeTab;
 }
 
-
-void Hash::generujTab()
+void Hash::fillKeys()
 {
-  bool t; //zmienne pomocnicze do generowania liczb losowych
-	int p;
-	int licznik = 0;
-	do      //generowanie liczb losowych bez powtorzen
-	{
-      string temp  = stringGenerator();
+  losowanieKluczy(sizeOfTab());
+}
 
-			//p =  rand() % 400; //zakres 1-40
-      p = changeString(temp);
+void Hash::addLink()
+{
+  int temp;
 
-			t = true;
-			for(int i = 0; i < licznik; i++)
-					if(dane[i] == p) //jesli wygenerowany element rowny juz istniejacemu, to t ma wartosc false
-					{
-							t = false;
-							break;
-					}
+  for(int i = 0;i < sizeOfTab();++i)
+  {
+    temp = *(array+i);
+    int index = hashSec(temp);
+    tab[index].pushFront(temp);
+  }
+}
 
-			if(t)
-      {
-        dane[licznik++] = p; //jesli t pozostalo true to wpisz element p do tablicy
-        //klucze[licznik++] =
-      }
+void Hash::searchLink()
+{
+  int temp;
 
-	} while(licznik < sizeTab); //petla do wypelnienia tablicy
+  for(int i = 0;i < sizeOfTab();++i)
+  {
+    temp = *(array+i);
+    int szukana = temp;
+    int ind = hashSec(szukana);
+    //cout << "Szukamy liczby: " << szukana << endl;
+    int indListy = 1;
+    //cout << tab[ind].getElement(indListy) << endl;
+    while(tab[ind].getElement(ind) != szukana )
+    {
+      indListy++;
+    }
+  }
+}
+
+void Hash::deleteLink()
+{
+  for(int i = 0;i < sizeOfTab();++i)
+  {
+	  tab[hashSec(*(array+i))].deleteFront();
+  }
+
+  //tab -> printAll();
 }
 
 void Hash::measureTime()
 {
+  int quantity = 10; //l. pomiarów
+  stoper pomiar;
 
+  fillKeys();
 
-  generujTab();
+  for(int i=0;i<quantity;++i)
+  {
+    pomiar.startPomiar();
+    addLink();
+    pomiar.koniecPomiar();
+    deleteLink();
+  }
 
+  /*addLink();
+  for(int i=0;i<quantity;++i)
+  {
+    pomiar.startPomiar();
+    searchLink();
+    pomiar.koniecPomiar();  }
 
-
-
-  for (int i=0;i<sizeTab;++i)
-      {
-        dodaj_probkowanie(dane[i]);
-      }
-
-
-      for (int i=0;i<sizeTab;i++)
-      {
-        wyszukaj_probkowanie(dane[i]);
-      }
-      //cout << endl;
-
-
-      for (int i=0;i<sizeTab;i++)
-      {
-         usun_probkowanie(dane[i]);
-      }
-
-
+  deleteLink();
+*/
 }

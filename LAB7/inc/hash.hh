@@ -10,35 +10,46 @@
 
 class Hash {
 
-  static const int sizeTab = 5;
-  lista** tab;
-  int dane[sizeTab];
-  string *klucze[sizeTab];
+  Lista* tab;
+  int* dane;       //
+  int *array;      // przechowuje losowe klucze
+
   int licznikKlucz = 0;
+  int sizeTab;
+
 
 public:
+
 
   Hash();
   ~Hash();
 
+  //FUNKCJE HASZUJĄCE
+  //
+  //hash(int)    - haszowanie modularne
+  //hashSec(int) - haszowanie przez mnożenie
   int   hash(const int value);
   int   hashSec(const int value);
-  int   changeString(string key);
-  void  addLink(int x);
-  int   deleteLink(int x);
-
-  bool wyszukaj_linkowanie(int x); //wyszukiwanie przez linkowanie
 
 
-  void dodaj_probkowanie(int x);
-  bool wyszukaj_probkowanie(int x);
-  int usun_probkowanie(int x);
+  //Rozwiazanie kolizji przez linkowanie
+  void addLink();
+  void searchLink();
+  void deleteLink();
 
+  //  Funkcje pomocnicze, które ułatwiają działanie programu
+  void fillKeys();
   int sizeOfTab();
-
-  void generujTab();
-  string stringGenerator();
   void measureTime();
+  void setSize();
+  bool liczba_pierwsza(int value);
+  void losowanieKluczy(int size);
+
+
+  // Funkcje gotowe do użycia wtedy kiedy chcemy aby klucze były
+  // przygotowywane na bazie słów (zastosowanie: słownik)
+  string stringGenerator();
+  int   changeString(string key);
 
 
 

@@ -1,25 +1,17 @@
 
 #include <iostream>
-
 #include "hash.hh"
-
 using namespace std;
 
-int* data;
-int rozmiar = 13; //rozmiar tablicy
+int main()
+{
 
-int main() {
+	Hash *object = new Hash;
+
+	object->measureTime();
 
 
-Hash *object = new Hash;
+	delete object;
 
-object -> measureTime();
-
- 
-
-delete object;
 	return 0;
-
-
-
 }
