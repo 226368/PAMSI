@@ -1,14 +1,14 @@
 #include <iostream>
-#include "BinaryTree.hh"
+#include "avlTree.hh"
+
+using namespace std;
 
 int main()
 {
 
-  BinaryTree* ptr = new BinaryTree;
+  iAvlTree* tree = new avlTree;
 
-  ptr -> measureTime();
-
-  delete ptr;
+  tree -> measureTime();
 
   return 0;
 }
