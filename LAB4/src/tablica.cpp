@@ -240,3 +240,58 @@ int Tablica::sizeTab()
 	return rozmiar;
 }
 
+
+void Tablica::quickSort(int lewy,int prawy)
+{
+	int v = tablica[(lewy+prawy)/2];          //element srodkowy jako pivot
+	//int v = tablica[lewy];										//początek tablicy jako pivot
+	//int v = tablica[rand() % prawy];						//losowy element tablicy jako pivot
+	int i,j,x;
+	i=lewy;
+	j=prawy;
+		do{
+			while (tablica[i]<v) i++;
+			while (tablica[j]>v) j--;
+			if(i<=j)
+			{
+				x = tablica[i];
+				tablica[i]=tablica[j];
+				tablica[j] = x;
+				i++;
+				j--;
+			}
+		}while (i<=j);
+		if(j>lewy) quickSort(lewy,j);
+		if(i<prawy) quickSort(i,prawy);
+}
+
+
+
+
+void Tablica::measureQuickSort()
+{
+	unsigned int quantity;
+	unsigned long int sizeOfTab[] = {16,128,1024,16384,131072,1048576,2097152,16777216};
+	cout << "\nIle razy chcesz dokonać pomiaru szybkości sortowania ? : ";
+	cin >> quantity;
+	cout <<"\nTablice jakiego rozmiaru chcesz sortować ?\n";
+	//cout <<"Zalecane rozmiary: 16, 128, 1024, 16384, 131072, 524288,1048576 \n";
+	//cin >> sizeOfTab;
+
+	for(unsigned long int j = 0;j<8;++j)
+	{
+		stoper pomiar;
+
+		for(unsigned int i=0;i<quantity;i++)
+		{
+			resetTablicy();
+			zwiekszanie_tablicy(sizeOfTab[j],2);
+			rozmiar = sizeOfTab[j];
+			pomiar.startPomiar();
+			quickSort(0,sizeTab()-1);
+			pomiar.koniecPomiar();
+			//resetTablicy();
+		}
+		cout << "pomiar dla rozmiaru: " << sizeTab() << endl;
+	}
+}

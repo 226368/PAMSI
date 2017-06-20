@@ -38,7 +38,7 @@ void Stack::pushElements(unsigned int volume)
 {
   for(unsigned int i =0;i<volume;++i)
   {
-    push(rand() % 10);
+    push(i);
   }
 }
 
@@ -111,12 +111,10 @@ void Stack::measureTime()
 
   for(unsigned int i=0;i<quantity;++i)
   {
-    resetStack();
-    //printList();
+    resetStack();;
     pomiar.startPomiar();
     pushElements(size);
     pomiar.koniecPomiar();
     resetStack();
-    //printList();
   }
 }

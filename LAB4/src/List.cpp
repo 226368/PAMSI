@@ -128,21 +128,29 @@ List::~List()
 
 void List::addElem(unsigned long int sizeList)
 {
-  for(unsigned long int i=0;i<sizeList;++i)
+  unsigned long int i=0;
+  while(i<sizeList)
   {
     pushFront(i);
+    //cout << "dodaje element: #" << i << endl;
+    ++i;
   }
   //printList();
 }
 
 void List::resetList()
 {
-  //cout << "\n\n w resetList Size() jest równe: " << size() << endl << endl;
-  for(int i=0;i<size();)
-  {
-    popBack();
-    //cout << "wywołany popBack! ! !\n\n";
-  }
+  unsigned long int i,sizea=size();
+
+  for(i =0;i<sizea;++i)
+    {
+      //listH *ptr = head;
+      //while(ptr)
+      {
+        popFront();
+        //ptr = ptr -> next;
+      }
+    }
 }
 
 void List::measureTime()
@@ -160,24 +168,12 @@ void List::measureTime()
 
     for(unsigned int i=0;i<quantity;++i)
     {
-      resetList();
-      //printList();
       pomiar.startPomiar();
       addElem(sizeList);
       pomiar.koniecPomiar();
-      resetList();
       //printList();
+      resetList();
+      //cout << "Lista składa się z: " << size() << "elementów" << endl << endl;
+
     }
-    /*pomiar.startPomiar();
-    addElem(sizeList);
-    pomiar.koniecPomiar();
-
-    cout << "rozmiar stosu to: " << size() << endl << endl;
-    //printList();
-
-
-    resetList();
-    printList();
-*/
-
 }

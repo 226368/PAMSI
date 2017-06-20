@@ -34,7 +34,7 @@ stoper::stoper()
 stoper::~stoper()
 {
 	cout.setf(ios::fixed);
-	cout.precision(5);
+	cout.precision(7);
 
 	double temp = 0;
 
@@ -44,5 +44,5 @@ stoper::~stoper()
 		cout << "wartość pomiaru " << i+1 <<" to " << *(ptr+i) << endl;
 	}
 
-	cout << "średnia wartość pomiaru szybkości programu to: " << temp/size << "sek\n" << endl;
+	cout << "średnia wartość pomiaru szybkości programu to: " << temp/size<< "sek\n" << endl;
 }

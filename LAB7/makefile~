@@ -1,0 +1,24 @@
+CPPFLAGS= -c -g -Iinc -fpermissive -std=c++11 -Wall -pedantic
+
+__START__: tablica
+	./tablica
+
+tablica: obj/main.o obj/hash.o obj/stoper.o  obj/List.o obj/listam.o
+	g++ -o tablica obj/main.o obj/hash.o obj/stoper.o obj/List.o obj/listam.o
+obj/main.o: src/main.cpp
+	g++ ${CPPFLAGS} -o obj/main.o src/main.cpp
+
+obj/stoper.o: src/stoper.cpp inc/stoper.hh
+	g++ ${CPPFLAGS} -o obj/stoper.o	src/stoper.cpp
+
+obj/List.o: src/List.cpp inc/List.hh
+	g++ ${CPPFLAGS} -o obj/List.o src/List.cpp
+
+obj/listam.o: src/listam.cpp inc/listam.hh
+	g++ ${CPPFLAGS} -o obj/listam.o src/listam.cpp
+
+obj/hash.o: src/hash.cpp inc/hash.hh
+	g++ ${CPPFLAGS} -o obj/hash.o src/hash.cpp
+
+clean:
+	rm -f obj/*.o tablica
